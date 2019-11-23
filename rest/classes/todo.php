@@ -36,7 +36,6 @@ class Todo {
         $query = $this->db->prepare("SELECT `todo_id` as todoId, `todo_name` as `todoName`, `todo_bucket_id` as `todoBucketId`, `todo_done` as todoDone FROM `todo` WHERE `todo_bucket_id` = ? ORDER BY `todo_id` DESC");
         $query->bindParam(1, $bucketId, PDO::PARAM_STR);
         $query->execute();
-        file_put_contents('test.log', print_r($bucket, true));
         return  array('todos' => $query->fetchAll(), 'bucketName' => $bucket[0]['bucketName']);
     }
     

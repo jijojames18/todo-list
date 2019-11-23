@@ -1,9 +1,5 @@
 <?php
 
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: *");
-header("Access-Control-Allow-Methods: *");
-
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
@@ -13,10 +9,6 @@ require 'classes/todo.php';
 require 'classes/bucket.php';
 
 $app = new \Slim\App;
-
-$app->options('/v1/bucket', function (Request $request, Response $response, array $args) {
-    return $response;
-});
 
 $app->get('/v1/buckets', function (Request $request, Response $response, array $args) {
     $bucket = new Bucket();
