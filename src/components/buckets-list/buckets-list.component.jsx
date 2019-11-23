@@ -19,7 +19,7 @@ const HomePage = ({buckets, errorMessage}) => {
                 <AddItemContainer type="bucket"></AddItemContainer>
                 {
                     errorMessage ?
-                        <h4 class="error">{errorMessage}</h4>
+                        <h4 className="error">{errorMessage}</h4>
                         :
                         ''
                 }

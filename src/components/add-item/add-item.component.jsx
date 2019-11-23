@@ -19,13 +19,15 @@ const AddItem = ({type, addBucket, addTodo, ...otherProps}) => {
         if (type === 'bucket') {
             addBucket({
                 'bucketId': v4(),
-                'bucketName': itemName
+                'bucketName': itemName,
+                'bucketCreatedTime': new Date().getTime()
             });
         } else {
             addTodo({
                 'todoId': v4(),
                 'todoName': itemName,
-                'todoBucketId': otherProps.bucketId
+                'todoBucketId': otherProps.bucketId,
+                'todoCreatedTime': new Date().getTime()
             });
         }
 

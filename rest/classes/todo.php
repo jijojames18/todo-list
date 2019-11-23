@@ -33,17 +33,18 @@ class Todo {
             return false;
         }
         
-        $query = $this->db->prepare("SELECT `todo_id` as todoId, `todo_name` as `todoName`, `todo_bucket_id` as `todoBucketId`, `todo_done` as todoDone FROM `todo` WHERE `todo_bucket_id` = ? ORDER BY `todo_id` DESC");
+        $query = $this->db->prepare("SELECT `todo_id` as todoId, `todo_name` as `todoName`, `todo_bucket_id` as `todoBucketId`, `todo_done` as todoDone, `todo_created_time` AS `todoCreatedTime` FROM `todo` WHERE `todo_bucket_id` = ? ORDER BY `todoCreatedTime` DESC");
         $query->bindParam(1, $bucketId, PDO::PARAM_STR);
         $query->execute();
         return  array('todos' => $query->fetchAll(), 'bucketName' => $bucket[0]['bucketName']);
     }
     
-    public function insertTodo($todoId, $todoName, $todoBucketId) {
-        $query = $this->db->prepare("INSERT INTO `todo` (`todo_id`, `todo_name`, `todo_done`, `todo_bucket_id`) VALUES (?, ?, 0, ?);");
+    public function insertTodo($todoId, $todoName, $todoBucketId, $todoCreatedTime) {
+        $query = $this->db->prepare("INSERT INTO `todo` (`todo_id`, `todo_name`, `todo_done`, `todo_bucket_id`, `todo_created_time`) VALUES (?, ?, 0, ?, ?);");
         $query->bindParam(1, $todoId, PDO::PARAM_STR);
         $query->bindParam(2, $todoName, PDO::PARAM_STR);
         $query->bindParam(3, $todoBucketId, PDO::PARAM_STR);
+        $query->bindParam(4, $todoCreatedTime, PDO::PARAM_INT);
         return $query->execute();
     }
     

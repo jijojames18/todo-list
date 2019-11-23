@@ -7,9 +7,14 @@ export const selectTodosIsLoading = createSelector(
     (todos) => todos.isLoading
 );
 
-export const selectTodosList = createSelector(
+export const selectPendingTodosList = createSelector(
     [selectTodos],
-    (todos) => todos.todos
+    (todos) => todos.todos.filter((todo) => parseInt(todo.todoDone) === 0)
+);
+
+export const selectDoneTodosList = createSelector(
+    [selectTodos],
+    (todos) => todos.todos.filter((todo) => parseInt(todo.todoDone) === 1)
 );
 
 export const selectBucketName = createSelector(

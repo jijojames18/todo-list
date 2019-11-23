@@ -1,14 +1,21 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: *");
+header("Access-Control-Allow-Methods: *");
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
 require 'bootstrap.php';
 require 'vendor/autoload.php';
-require 'classes/todo.php';
-require 'classes/bucket.php';
+require 'classes/Todo.php';
+require 'classes/Bucket.php';
 
 $app = new \Slim\App;
+
+$app->options('/v1/bucket', function (Request $request, Response $response, array $args) {
+    return $response;
+});
 
 $app->get('/v1/buckets', function (Request $request, Response $response, array $args) {
     $bucket = new Bucket();
@@ -34,7 +41,8 @@ $app->post('/v1/bucket', function (Request $request, Response $response, array $
     
     $bucketId = escapeRequestData($bucketData['bucketId']);
     $bucketName = isset($bucketData['bucketName']) ? escapeRequestData($bucketData['bucketName']) : '';
-    if ($bucket->insertBucket($bucketId, $bucketName))
+    $bucketCreatedTime = isset($bucketData['bucketCreatedTime']) ? escapeRequestData($bucketData['bucketCreatedTime']) : '';
+    if ($bucket->insertBucket($bucketId, $bucketName, $bucketCreatedTime))
     {
         return $response->withJson(array('message' => 'ok'));
     }
@@ -71,7 +79,8 @@ $app->post('/v1/todo', function (Request $request, Response $response, array $ar
     $todoId = escapeRequestData($todoData['todoId']);
     $todoName = isset($todoData['todoName']) ? escapeRequestData($todoData['todoName']) : '';
     $todoBucketId = escapeRequestData($todoData['todoBucketId']);
-    if ($todo->insertTodo($todoId, $todoName, $todoBucketId))
+    $todoCreatedTime = isset($todoData['todoCreatedTime']) ? escapeRequestData($todoData['todoCreatedTime']) : '';
+    if ($todo->insertTodo($todoId, $todoName, $todoBucketId, $todoCreatedTime))
     {
         return $response->withJson(array('message' => 'ok'));
     }

@@ -10,14 +10,15 @@ import WithSpinner from '../with-spinner/with-spinner.component';
 import {fetchTodosStart} from '../../redux/todos/todos.actions';
 import {
     selectTodosIsLoading,
-    selectTodosList,
+    selectPendingTodosList,
+    selectDoneTodosList,
     selectBucketName,
     selectErrorMessage
 } from '../../redux/todos/todos.selectors';
 
 import './todos-list.styles.scss';
 
-const TodoList = ({todos, match, history, bucketName, errorMessage}) => {
+const TodoList = ({pendingTodos, doneTodos, match, history, bucketName, errorMessage}) => {
     return (
         <div className="todos-list">
             <div className="add-item-container">
@@ -28,14 +29,22 @@ const TodoList = ({todos, match, history, bucketName, errorMessage}) => {
                 <AddItemContainer type="todo" bucketId={match.params.id}/>
                 {
                     errorMessage ?
-                        <h4 class="error">{errorMessage}</h4>
+                        <h4 className="error">{errorMessage}</h4>
                         :
                         ''
                 }
             </div>
             <div className="todos">
                 {
-                    todos.map(todo => {
+                    
+                    pendingTodos.map(todo => {
+                        return <TodoListItem key={todo.todoId} todo={todo}/>
+                    })
+                }
+            </div>
+            <div className="todos">
+                {
+                    doneTodos.map(todo => {
                         return <TodoListItem key={todo.todoId} todo={todo}/>
                     })
                 }
@@ -45,7 +54,8 @@ const TodoList = ({todos, match, history, bucketName, errorMessage}) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-    todos: selectTodosList,
+    pendingTodos: selectPendingTodosList,
+    doneTodos: selectDoneTodosList,
     isLoading: selectTodosIsLoading,
     bucketName: selectBucketName,
     errorMessage: selectErrorMessage

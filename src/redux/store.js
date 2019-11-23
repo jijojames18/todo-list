@@ -7,7 +7,12 @@ import rootReducer from './root-reducer';
 
 const sagaMiddleware = createSagaMiddleware();
 
-const middleWares = [logger, sagaMiddleware];
+const middleWares = [sagaMiddleware];
+
+
+if (process.env.NODE_ENV === "development") {
+    middleWares.push(logger);
+}
 
 const store = createStore(rootReducer, applyMiddleware(...middleWares));
 
