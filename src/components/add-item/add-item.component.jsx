@@ -27,7 +27,8 @@ const AddItem = ({type, addBucket, addTodo, ...otherProps}) => {
                 'todoId': v4(),
                 'todoName': itemName,
                 'todoBucketId': otherProps.bucketId,
-                'todoCreatedTime': new Date().getTime()
+                'todoCreatedTime': new Date().getTime(),
+                'todoDone': 0
             });
         }
 

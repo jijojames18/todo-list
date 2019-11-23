@@ -18,15 +18,12 @@ const todosReducer = (state = INITIAL_STATE, action) => {
                 bucketName: ''
             };
         case TODO_ACTION_CONSTANTS.MODIFY_TODO_SUCCESS:
-            console.log(state);
-            const test = {
+            return {
                 ...state,
                 isLoading: false,
                 error: null,
                 todos: updateSpecificTodo(state.todos, action.payload)
             };
-            console.log(test);
-            return test;
         case TODO_ACTION_CONSTANTS.DELETE_TODO_SUCCESS:
             return {
                 ...state,

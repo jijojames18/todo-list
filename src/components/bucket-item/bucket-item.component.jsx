@@ -4,7 +4,6 @@ import {withRouter} from 'react-router-dom';
 import './bucket-item.styles.scss';
 
 const BucketItem = ({bucket, history}) => {
-    console.log(process.env);
     const {bucketName, bucketId} = bucket;
 
     return (
