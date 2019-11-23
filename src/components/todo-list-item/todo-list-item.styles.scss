@@ -1,0 +1,43 @@
+.todo-item {
+    display: flex;
+    cursor: pointer;
+    position: relative;
+    padding: 12px 8px 12px 40px;
+    background: #eee;
+    font-size: 18px;
+    transition: 0.2s;
+
+    .button {
+        width: 10%;
+        align-self: center;
+        text-align: center;
+    }
+
+    .is-editing {
+        margin-left: 22px;
+    }
+
+    .hidden {
+        visibility: hidden;
+    }
+
+    .todo-name {
+        width: 80%;
+        align-self: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &:nth-child(odd) {
+        background: #f9f9f9;
+    }
+
+    &:hover {
+        background: #ddd;
+    }
+
+    .todo-name.done {
+        text-decoration: line-through;
+    }
+}

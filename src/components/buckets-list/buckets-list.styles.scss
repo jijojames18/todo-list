@@ -1,0 +1,11 @@
+.buckets-list {
+    display: flex;
+    flex-direction: column;
+
+    .add-item-container {
+        background-color: mediumpurple;
+        padding: 30px 40px;
+        color: white;
+        text-align: center;
+    }
+}

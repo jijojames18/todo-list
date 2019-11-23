@@ -1,0 +1,25 @@
+.todos-list {
+    display: flex;
+    flex-direction: column;
+
+    .add-item-container {
+        background-color: mediumpurple;
+        padding: 30px 40px;
+        color: white;
+        text-align: center;
+
+        .header {
+            display: flex;
+
+            .bucket-name {
+                flex-grow: 100;
+            }
+
+            .back-icon {
+                flex-grow: 1;
+                cursor: pointer;
+            }
+        }
+    }
+}
+  
